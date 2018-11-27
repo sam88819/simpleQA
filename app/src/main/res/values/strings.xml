@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">QuizAndAnswer</string>
+    <!--xml用途-->
+    <string name="welcome">Welcome to Q&amp;A!</string>
+    <string name="choice_true">True</string>
+    <string name="choice_false">False</string>
+    <string name="choice_next">Next</string>
+    <string name="choice_prerious">Prev</string>
+    <!--Activity用途-->
+    <string name="true_Toast">Correct!</string>
+    <string name="false_Toast">InCorrect!</string>
+    <!--用于问题初始化-->
+    <string name="question1">C语言是高级语言？</string>
+    <string name="answer1">true</string>
+    <string name="question2">Python运行速度比C语言快？</string>
+    <string name="answer2">false</string>
+    <string name="question3">一年有366天？</string>
+    <string name="answer3">false</string>
+    <string name="question4">插入排序和快速排序的时间复杂度一样？</string>
+    <string name="answer4">true</string>
+</resources>
