@@ -50,4 +50,17 @@
             android:text="@string/choice_next"
             android:padding="24dp"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/buttonArea3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/getAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="作弊"
+            android:padding="24dp"/>
+    </LinearLayout>
 </LinearLayout>
