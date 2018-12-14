@@ -1,6 +1,8 @@
 package com.example.jam.quizandanswer;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mquestionText;
     private static final String EXTRA_ANSWER_IS_TRUE =
             "com.bignerdranch.android.geoquiz.answer_is_true";
+    private static final int REQUEST_CODE_ISCHEAT=0;
 
     //初始化问题
     private Question[] mQuestions = new Question[]{
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
+    private boolean mIsCheater;
 
 
     @Override
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean answerIsTrue = mQuestions[mCurrentIndex].isAnswer();
                 Intent i = cheatActivity.newIntent(MainActivity.this,answerIsTrue);
-                startActivity(i);
+                startActivityForResult(i,REQUEST_CODE_ISCHEAT);
             }
         });
 
@@ -105,10 +109,14 @@ public class MainActivity extends AppCompatActivity {
     private void checkAnswer(boolean judgement){
         boolean settingAnswer = mQuestions[mCurrentIndex].isAnswer();
         int judgementPrint = 0;
-        if(judgement == settingAnswer)
-            judgementPrint = R.string.true_Toast;
-        else
-            judgementPrint = R.string.false_Toast;
+        if(mIsCheater){
+            judgementPrint = R.string.judgement_Toast;
+        }else{
+            if(judgement == settingAnswer)
+                judgementPrint = R.string.true_Toast;
+            else
+                judgementPrint = R.string.false_Toast;
+        }
         Toast.makeText(getApplicationContext(),judgementPrint,Toast.LENGTH_SHORT).show();
     }
 
@@ -123,5 +131,22 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode != Activity.RESULT_OK)
+        {
+            return;
+        }
+        if(requestCode == REQUEST_CODE_ISCHEAT)
+        {
+            if(data == null)
+            {
+                return;
+            }
+            mIsCheater = cheatActivity.wasAnswerShown(data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

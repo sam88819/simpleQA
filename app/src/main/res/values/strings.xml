@@ -9,6 +9,7 @@
     <!--Activity用途-->
     <string name="true_Toast">Correct!</string>
     <string name="false_Toast">InCorrect!</string>
+    <string name="judgement_Toast">Cheater!</string>
     <!--用于问题初始化-->
     <string name="question1">C语言是高级语言？</string>
     <string name="answer1">true</string>

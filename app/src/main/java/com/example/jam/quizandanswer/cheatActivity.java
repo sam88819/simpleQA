@@ -21,6 +21,7 @@ public class cheatActivity extends AppCompatActivity {
     private boolean mAnswerIsTrue;
     private TextView mTextView;
     private Button mButton;
+    private static final String EXTRA_ANSWER_IS_SHOWN = "com.bignerdranch.android.geoquiz.answer_shown";
 
 
     /**
@@ -53,7 +54,31 @@ public class cheatActivity extends AppCompatActivity {
                 }else{
                     mTextView.setText(R.string.choice_false);
                 }
+                setAnswerShownResult(true);
             }
         });
+    }
+
+    /**
+     * @name setAnswerShownResult(boolean isAnswerShown)
+     * @function 创建Intent然后通过Extra存放是否显示了答案的标志，将返回值发送给父Activity
+     * @param isAnswerShown
+     */
+    public void setAnswerShownResult(boolean isAnswerShown)
+    {
+        Intent i = new Intent();
+        i.putExtra(EXTRA_ANSWER_IS_SHOWN,isAnswerShown);
+        setResult(RESULT_OK,i);
+    }
+
+    /**
+     * @name wasAnswerShown(Intent result)
+     * @function 获取从子Activity发送的Extra，得到是否作弊显示了答案的标志
+     * @param result
+     * @return
+     */
+    public static boolean wasAnswerShown(Intent result)
+    {
+        return result.getBooleanExtra(EXTRA_ANSWER_IS_SHOWN,false);
     }
 }
